@@ -261,20 +261,19 @@ HTML = r"""
             }
         }
 
-        /* Logo wrap có hiệu ứng hover sinh hoa */
+        /* Logo wrap có hiệu ứng hover sinh hoa & click xem system info */
         .logo-box {
             display: flex;
             align-items: center;
             gap: 10px;
-            cursor: default;
+            cursor: pointer;
             position: relative;
+            user-select: none;
+            transition: transform 0.2s var(--spring), filter 0.2s;
         }
         .logo-box:hover {
-            animation: logoGlow 0.8s ease-in-out;
-        }
-        @keyframes logoGlow {
-            0%, 100% { filter: drop-shadow(0 0 0 transparent); }
-            50% { filter: drop-shadow(0 0 8px rgba(255, 94, 151, 0.4)); }
+            transform: scale(1.03);
+            filter: drop-shadow(0 0 10px rgba(255, 94, 151, 0.5));
         }
 
         .logo-title {
@@ -453,12 +452,631 @@ HTML = r"""
             background: #fff0f5;
         }
 
+        /* HEADER BUTTONS EQUAL SIZE & HARMONY */
+        .header-actions .btn {
+            box-sizing: border-box;
+            height: 38px;
+            padding: 0 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 19px;
+            line-height: 1;
+            white-space: nowrap;
+        }
+        .header-actions .btn:not(.btn-outline) {
+            border: 2px solid transparent;
+        }
+
+        /* ============================================================ */
+        /* MEOWCODE IDE PRO - HIGH-TECH SYSTEM TELEMETRY MODAL          */
+        /* ============================================================ */
+        .ide-info-modal-card {
+            max-width: 760px !important;
+            width: 95% !important;
+            max-height: 88vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(160deg, #0e121a 0%, #161220 50%, #0a0d14 100%) !important;
+            border: 1.5px solid rgba(255, 94, 151, 0.45) !important;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(255, 94, 151, 0.25) !important;
+            color: #e2e8f0 !important;
+            padding: 24px 28px;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            backdrop-filter: blur(16px);
+        }
+        .ide-info-modal-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff5e97, #38bdf8, #10b981, #ff5e97);
+            background-size: 200% 100%;
+            animation: ideScanline 4s linear infinite;
+        }
+        @keyframes ideScanline {
+            0% { background-position: 0% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .ide-info-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        .ide-info-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .ide-info-mascot {
+            position: relative;
+            width: 44px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .mascot-cat-glow {
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 94, 151, 0.35) 0%, transparent 70%);
+            animation: mascotHaloPulse 3s infinite alternate ease-in-out;
+        }
+        @keyframes mascotHaloPulse {
+            0% { transform: scale(0.9); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 0.9; }
+        }
+        .ide-info-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .ide-info-title {
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #ffffff 30%, #ff8fb7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .ide-info-badge {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #ff5e97;
+            background: rgba(255, 94, 151, 0.12);
+            border: 1px solid rgba(255, 94, 151, 0.3);
+            padding: 2px 7px;
+            border-radius: 6px;
+        }
+        .ide-info-chip-live {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 2px 7px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .chip-dot-pulse {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 6px #10b981;
+            animation: chipPulse 1.8s infinite ease-in-out;
+        }
+        @keyframes chipPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.5; }
+        }
+        .ide-info-sub {
+            font-size: 0.76rem;
+            color: #94a3b8;
+            margin-top: 3px;
+        }
+        .modal-close-btn.ide-info-close {
+            position: static;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #cbd5e1;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .modal-close-btn.ide-info-close:hover {
+            background: rgba(255, 94, 151, 0.2);
+            color: #ff8fb7;
+            border-color: #ff5e97;
+            transform: scale(1.1);
+        }
+        .ide-spec-chips {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .spec-chip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 16px;
+            padding: 4px 10px;
+            font-size: 0.73rem;
+            color: #cbd5e1;
+            font-family: 'Fira Code', monospace;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .spec-chip b {
+            color: #38bdf8;
+            font-weight: 600;
+        }
+        .ide-info-tabs {
+            display: flex;
+            gap: 6px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            overflow-x: auto;
+        }
+        .ide-tab-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: #94a3b8;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 5px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .ide-tab-btn:hover {
+            color: #f1f5f9;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .ide-tab-btn.active {
+            background: rgba(255, 94, 151, 0.15);
+            color: #ff8fb7;
+            border-color: rgba(255, 94, 151, 0.35);
+        }
+        .ide-tab-content {
+            display: none;
+            overflow-y: auto;
+            max-height: 48vh;
+            padding-right: 4px;
+        }
+        .ide-tab-content.active {
+            display: block;
+            animation: tabFadeIn 0.25s ease-out;
+        }
+        @keyframes tabFadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .ide-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        @media (max-width: 650px) {
+            .ide-grid { grid-template-columns: 1fr; }
+        }
+        .ide-grid-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 14px;
+            padding: 13px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            transition: border-color 0.2s;
+        }
+        .ide-grid-card:hover {
+            border-color: rgba(255, 94, 151, 0.25);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .ide-card-lbl {
+            font-size: 0.67rem;
+            font-weight: 800;
+            color: #ff8fb7;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+        .ide-card-val-big {
+            font-size: 0.98rem;
+            font-weight: 800;
+            color: #f8fafc;
+            font-family: 'Fira Code', monospace;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .ide-spec-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.74rem;
+            color: #94a3b8;
+            margin: 2px 0;
+            gap: 8px;
+        }
+        .ide-spec-line code {
+            color: #38bdf8;
+            font-family: 'Fira Code', monospace;
+            background: rgba(56, 189, 248, 0.08);
+            padding: 1px 6px;
+            border-radius: 4px;
+            max-width: 210px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .ide-meter-box {
+            margin-top: 5px;
+        }
+        .ide-meter-head {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            color: #94a3b8;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        .meter-pct {
+            color: #38bdf8;
+            font-family: 'Fira Code', monospace;
+            font-weight: 700;
+        }
+        .ide-meter-bg {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .ide-meter-bar {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #ff5e97, #ff8fb7);
+            transition: width 0.6s var(--spring);
+        }
+        .ide-meter-bar.color-cyan {
+            background: linear-gradient(90deg, #0284c7, #38bdf8);
+        }
+        .ide-meter-bar.color-green {
+            background: linear-gradient(90deg, #059669, #10b981);
+        }
+        .ide-console-box {
+            background: #080a10;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.77rem;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+        .console-row {
+            display: flex;
+            gap: 12px;
+            align-items: baseline;
+            justify-content: space-between;
+        }
+        .console-k {
+            color: #94a3b8;
+            min-width: 180px;
+            flex-shrink: 0;
+        }
+        .console-v {
+            color: #cbd5e1;
+            text-align: right;
+            word-break: break-all;
+        }
+        .console-v.text-highlight {
+            color: #38bdf8;
+            font-weight: 700;
+        }
+        .console-v.text-code {
+            color: #ff8fb7;
+            background: rgba(255, 94, 151, 0.08);
+            padding: 1px 6px;
+            border-radius: 4px;
+        }
+        .ide-info-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.09);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .ide-footer-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.74rem;
+            color: #94a3b8;
+        }
+        .telemetry-live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #10b981;
+            font-weight: 700;
+            font-family: 'Fira Code', monospace;
+        }
+        .ping-circle {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 6px #10b981;
+            animation: chipPulse 1.5s infinite;
+        }
+        .ide-footer-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ide-btn-tech {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #e2e8f0;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 16px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .ide-btn-tech:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            transform: translateY(-1px);
+        }
+        .ide-btn-tech.ide-btn-highlight {
+            background: linear-gradient(135deg, #ff5e97, #ff3b80);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 10px rgba(255, 94, 151, 0.35);
+        }
+        .ide-btn-tech.ide-btn-highlight:hover {
+            box-shadow: 0 4px 16px rgba(255, 94, 151, 0.55);
+            transform: translateY(-1px);
+        }
+        .spinning {
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
         /* MAIN LAYOUT */
         .main-container {
             display: flex;
             flex: 1;
             overflow: hidden;
             position: relative;
+        }
+        
+        /* ACTIVITY LOG SIDEBAR */
+        .activity-log-sidebar {
+            width: 280px;
+            background: rgba(255, 240, 245, 0.88);
+            backdrop-filter: blur(8px);
+            border-left: 2px dashed var(--pink-border);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            position: relative;
+            transition: width 0.35s var(--spring), opacity 0.3s;
+        }
+        body.dark-mode .activity-log-sidebar {
+            background: rgba(30, 16, 48, 0.88);
+            border-left-color: #3a2244;
+        }
+        .activity-log-sidebar.collapsed {
+            width: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .activity-log-header {
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid var(--pink-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: var(--pink-hot);
+        }
+        body.dark-mode .activity-log-header {
+            background: rgba(40, 25, 55, 0.95);
+            color: var(--pink-light);
+            border-bottom-color: #3a2244;
+        }
+        .activity-log-header-title {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .activity-log-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--pink-hot);
+            font-size: 1.2rem;
+            padding: 2px;
+            transition: transform 0.2s;
+        }
+        body.dark-mode .activity-log-toggle {
+            color: var(--pink-light);
+        }
+        .activity-log-toggle:hover {
+            transform: scale(1.15) rotate(10deg);
+        }
+        .activity-log-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        body.dark-mode .activity-log-body {
+            background: transparent;
+        }
+        .activity-log-item {
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            border-left: 4px solid var(--pink-hot);
+            border-top: 1px solid var(--pink-border);
+            border-right: 1px solid var(--pink-border);
+            border-bottom: 1px solid var(--pink-border);
+            animation: logItemSlide 0.4s var(--spring);
+            position: relative;
+            transition: transform 0.2s;
+        }
+        body.dark-mode .activity-log-item {
+            background: rgba(40, 25, 55, 0.85);
+            border-left-color: var(--pink-light);
+            border-top-color: #3a2244;
+            border-right-color: #3a2244;
+            border-bottom-color: #3a2244;
+        }
+        .activity-log-item:hover {
+            transform: translateX(-3px);
+            box-shadow: 0 3px 10px rgba(255, 94, 151, 0.2);
+        }
+        body.dark-mode .activity-log-item:hover {
+            box-shadow: 0 3px 10px rgba(255, 175, 204, 0.15);
+        }
+        @keyframes logItemSlide {
+            0% { opacity: 0; transform: translateX(15px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        .activity-log-item.success {
+            border-left-color: var(--success);
+        }
+        .activity-log-time {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        body.dark-mode .activity-log-time {
+            color: #a89bb0;
+        }
+        .activity-log-message {
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        body.dark-mode .activity-log-message {
+            color: #e8d5f0;
+        }
+        .activity-log-message .icon-svg {
+            flex-shrink: 0;
+            display: inline-flex;
+        }
+        .activity-log-message .icon-svg svg {
+            width: 14px;
+            height: 14px;
+        }
+        .activity-log-item.success .activity-log-message .icon-svg svg {
+            stroke: var(--success);
+        }
+        .activity-log-problem {
+            font-size: 0.75rem;
+            color: var(--pink-hot);
+            font-weight: 700;
+            margin-top: 2px;
+        }
+        body.dark-mode .activity-log-problem {
+            color: var(--pink-light);
+        }
+        .activity-log-empty {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        body.dark-mode .activity-log-empty {
+            color: #a89bb0;
+        }
+        .activity-log-empty-cat {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            opacity: 0.6;
+            animation: emptyMeowSway 2s ease-in-out infinite;
+        }
+        @keyframes emptyMeowSway {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+        
+        /* ACTIVITY LOG TOGGLE BUTTON (when collapsed) */
+        .activity-log-reopen-btn {
+            position: fixed;
+            right: 10px;
+            bottom: 45px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink-light), var(--pink-hot));
+            border: 2px solid white;
+            box-shadow: 0 4px 16px rgba(255, 94, 151, 0.35);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: all 0.3s var(--spring);
+            z-index: 200;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .activity-log-reopen-btn.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .activity-log-reopen-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 6px 20px rgba(255, 94, 151, 0.5);
+        }
+        .activity-log-reopen-btn:active {
+            transform: scale(0.95);
+        }
+        body.dark-mode .activity-log-reopen-btn {
+            border-color: rgba(255, 255, 255, 0.2);
         }
         .sidebar {
             width: 320px;
@@ -1103,6 +1721,7 @@ HTML = r"""
             overflow: hidden;
         }
         .results-panel.expanded { height: 350px; }
+        .results-panel.collapsed { height: 40px; }
         .results-header {
             padding: 8px 16px;
             background: #fffafc;
@@ -2559,19 +3178,54 @@ HTML = r"""
         ::-webkit-scrollbar { width: 7px; height: 7px; }
         ::-webkit-scrollbar-thumb { background: var(--pink-border); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--pink-hot); }
+        
+        /* DISCLAIMER BANNER */
+        .disclaimer-banner {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
+            border-bottom: 2px solid #ffd966;
+            padding: 6px 16px;
+            text-align: center;
+            font-size: 0.78rem;
+            color: #856404;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(255, 193, 7, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            z-index: 101;
+        }
+        .disclaimer-banner .icon-notice {
+            font-size: 0.9rem;
+            animation: noticeGlow 2s ease-in-out infinite;
+        }
+        @keyframes noticeGlow {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        body.dark-mode .disclaimer-banner {
+            background: linear-gradient(135deg, #3d3520 0%, #4a3f28 100%);
+            border-bottom-color: #856404;
+            color: #ffd966;
+        }
     </style>
 </head>
 <body>
+    <!-- DISCLAIMER BANNER -->
+    <div class="disclaimer-banner">
+        <span>MeowCode không phải sản phẩm chính thức của VNU-UET, đây là trang do sinh viên trường tạo ra để dễ dàng làm 100 bài code với test case (và mèo)</span>
+    </div>
+    
     <!-- HEADER -->
     <header>
         <div class="header-left">
             <a class="uet-logo-wrap" href="https://uet.vnu.edu.vn" target="_blank" title="Truong Dai hoc Cong nghe - DHQGHN">
                 <img class="uet-logo-img" src="https://upload.wikimedia.org/wikipedia/vi/b/bf/Logo_HUET.svg"
                      onerror="this.style.display='none'" alt="UET Logo">
-                <div class="uet-logo-label">ĐHQGHN<br>Trường ĐH Công nghệ</div>
+                     <span class="uet-logo-label">Sinh viên<br>VNU-UET</span>
             </a>
-            <div class="logo-box">
-                <div class="mascot-cat" title="Meow! Chúc Sen code vui vẻ!">
+            <div class="logo-box" onclick="openIdeInfoModal()" title="🐾 MeowCode Studio Pro - Bấm xem cấu hình máy & hệ thống (IDE Diagnostics)">
+                <div class="mascot-cat" title="🐾 Bấm để xem thông tin MeowCode IDE Pro & Thiết bị!">
                     <div class="mcat-head">
                         <div class="mcat-ear l"></div>
                         <div class="mcat-ear r"></div>
@@ -2595,12 +3249,17 @@ HTML = r"""
             </div>
             <!-- Cat #6: Header watcher cat -->
             <div class="header-watcher-cat" onclick="spawnPawConfetti()" title="Bấm mèo để tung confetti!"><div class="mc " style="width:28px;height:24px;display:inline-block;position:relative;"><div class="mc tl" style="width:12px;height:3px;top:10px;left:-8px;"></div><div class="mc h" style="width:18px;height:18px;top:0;left:5px;"><div class="mc el" style="border-left-width:5px;border-right-width:5px;border-bottom-width:8px;top:-6px;left:1px;transform:rotate(-15deg);"></div><div class="mc er" style="border-left-width:5px;border-right-width:5px;border-bottom-width:8px;top:-6px;right:1px;transform:rotate(15deg);"></div><div class="mc ey" style="top:8px;left:4px;"></div><div class="mc ey" style="top:8px;right:4px;"></div><div class="mc ns" style="top:12px;left:50%;transform:translateX(-50%);"></div><div style="position:absolute;width:5px;height:3px;background:rgba(255,94,151,0.5);border-radius:50%;top:11px;left:1px;"></div><div style="position:absolute;width:5px;height:3px;background:rgba(255,94,151,0.5);border-radius:50%;top:11px;right:1px;"></div></div></div>            </div>
-            <button class="btn btn-outline" id="darkModeBtn" onclick="toggleDarkMode()" title="Chuyển giao diện sáng/tối" style="padding:6px 10px;">
-                <span class="icon-svg" id="darkModeIcon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+            <button class="btn btn-outline" id="darkModeBtn" onclick="toggleDarkMode()" title="Chuyển giao diện sáng/tối (Theme)">
+                <span class="icon-svg" id="darkModeIcon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+                <span id="darkModeLabel">Giao diện</span>
             </button>
             <input type="file" id="ipynbFile" accept=".ipynb" style="display:none;" onchange="handleImportIpynb(event)">
             <button class="btn btn-outline" onclick="document.getElementById('ipynbFile').click()"><span class="icon-svg"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span> Nhập .ipynb</button>
             <button class="btn" onclick="exportIpynb()"><span class="icon-svg"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span> Xuất Notebook</button>
+            <button class="btn btn-outline" id="ideInfoBtn" onclick="openIdeInfoModal()" title="Thông tin MeowCode IDE & Hệ thống (System Diagnostics)">
+                <span class="icon-svg"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+                <span>Thông tin</span>
+            </button>
         </div>
     </header>
 
@@ -2680,8 +3339,7 @@ HTML = r"""
 
                 <div class="editor-header">
                     <div class="editor-header-left">
-                        <span class="tab-file-pill"><span class="tab-file-dot"></span> solution.py</span>
-                        <span style="font-size: 0.78rem; color: #888;">Phím tắt: <b>Ctrl+Enter</b> chấm bài</span>
+                        <span class="tab-file-pill"><span class="tab-file-dot"></span> kawaii.py</span>
                     </div>
                     <div class="editor-controls">
                         <div class="font-size-control" title="Chỉnh cỡ chữ (Ctrl + = / Ctrl + -)">
@@ -2830,10 +3488,31 @@ HTML = r"""
                 </div>
             </div>
         </div>
+        
+        <!-- ACTIVITY LOG SIDEBAR -->
+        <div class="activity-log-sidebar" id="activityLogSidebar">
+            <div class="activity-log-header">
+                <div class="activity-log-header-title">
+                    <span class="icon-svg"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></span> Activity Log
+                </div>
+                <button class="activity-log-toggle" onclick="toggleActivityLog()" title="Thu gọn / mở rộng">✕</button>
+            </div>
+            <div class="activity-log-body" id="activityLogBody">
+                <div class="activity-log-empty">
+                    <div class="activity-log-empty-cat">😺</div>
+                    <div>Chưa có hoạt động nào meow~</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Cat #7: Edge climber -->
     <div class="edge-climber"><div class="mc " style="width:28px;height:32px;display:inline-block;position:relative;"><div class="mc tl" style="width:12px;height:3px;top:13px;left:-8px;"></div><div class="mc h" style="width:18px;height:24px;top:0;left:5px;"><div class="mc el" style="border-left-width:5px;border-right-width:5px;border-bottom-width:8px;top:-6px;left:1px;transform:rotate(-15deg);"></div><div class="mc er" style="border-left-width:5px;border-right-width:5px;border-bottom-width:8px;top:-6px;right:1px;transform:rotate(15deg);"></div><div class="mc ey" style="top:9px;left:4px;"></div><div class="mc ey" style="top:9px;right:4px;"></div><div class="mc ns" style="top:15px;left:50%;transform:translateX(-50%);"></div></div></div>    </div>
+    
+    <!-- Activity Log Reopen Button (shows when collapsed) -->
+    <button class="activity-log-reopen-btn" id="activityLogReopenBtn" onclick="toggleActivityLog()" title="Mở Activity Log">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+    </button>
     <!-- Cat #8: Topbar lurker -->
     <div class="topbar-lurker"><div class="mc " style="width:36px;height:24px;display:inline-block;position:relative;"><div class="mc tl" style="width:12px;height:3px;top:10px;left:-8px;"></div><div class="mc h" style="width:23px;height:18px;top:0;left:6px;"><div class="mc el" style="border-left-width:5px;border-right-width:5px;border-bottom-width:8px;top:-6px;left:2px;transform:rotate(-15deg);"></div><div class="mc er" style="border-left-width:5px;border-right-width:5px;border-bottom-width:8px;top:-6px;right:2px;transform:rotate(15deg);"></div><div class="mc ec" style="top:8px;left:5px;"></div><div class="mc ec" style="top:8px;right:5px;"></div><div class="mc ns" style="top:13px;left:50%;transform:translateX(-50%);"></div></div></div>    </div>
     <!-- Cat #3: Corner peeker TR -->
@@ -2977,6 +3656,173 @@ HTML = r"""
                     <td style="text-align: right;"><span style="color: #10b981; font-weight: 700;">Tự lưu sau 1.5s</span></td>
                 </tr>
             </table>
+        </div>
+    </div>
+
+    <!-- IDE SYSTEM INFO & TELEMETRY MODAL (PRO IDE ABOUT WINDOW) -->
+    <div class="modal-overlay" id="ideInfoModal" onclick="if(event.target === this) closeIdeInfoModal()">
+        <div class="modal-card ide-info-modal-card">
+            <!-- Modal Header -->
+            <div class="ide-info-header">
+                <div class="ide-info-brand">
+                    <div class="ide-info-mascot">
+                        <div class="mascot-cat-glow"></div>
+                        <div class="mascot-cat">
+                            <div class="mcat-head">
+                                <div class="mcat-ear l"></div>
+                                <div class="mcat-ear r"></div>
+                                <div class="mcat-eye l"></div>
+                                <div class="mcat-eye r"></div>
+                                <div class="mcat-nose"></div>
+                                <div class="mcat-blush l"></div>
+                                <div class="mcat-blush r"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="ide-info-title-wrap">
+                            <span class="ide-info-title">MeowCode Studio Pro</span>
+                            <span class="ide-info-badge">v2.4.0-PRO</span>
+                            <span class="ide-info-chip-live"><span class="chip-dot-pulse"></span> ONLINE</span>
+                        </div>
+                        <div class="ide-info-sub">Advanced Academic IDE & Real-Time Python Test Engine • VNU-UET Edition</div>
+                    </div>
+                </div>
+                <button class="modal-close-btn ide-info-close" onclick="closeIdeInfoModal()">✕</button>
+            </div>
+
+            <!-- Fast Quick-Spec Bar -->
+            <div class="ide-spec-chips" id="ideSpecChips">
+                <span class="spec-chip"><span class="chip-icon">🖥️</span> <b id="chipOs">Đang quét OS...</b></span>
+                <span class="spec-chip"><span class="chip-icon">⚡</span> <b id="chipCpu">Đang đọc CPU...</b></span>
+                <span class="spec-chip"><span class="chip-icon">🎮</span> <b id="chipGpu">Đang dò GPU...</b></span>
+                <span class="spec-chip"><span class="chip-icon">🐍</span> <b id="chipPy">Python ...</b></span>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="ide-info-tabs">
+                <button class="ide-tab-btn active" onclick="switchIdeTab('telemetry', this)">⚡ Phần cứng & Máy chủ</button>
+                <button class="ide-tab-btn" onclick="switchIdeTab('python', this)">🐍 Python & Runtime</button>
+                <button class="ide-tab-btn" onclick="switchIdeTab('client', this)">🎮 Đồ họa & WebGL</button>
+                <button class="ide-tab-btn" onclick="switchIdeTab('license', this)">🐾 IDE & Bản quyền</button>
+            </div>
+
+            <!-- Tab 1: Hardware & Host Telemetry -->
+            <div class="ide-tab-content active" id="tabTelemetry">
+                <div class="ide-grid">
+                    <div class="ide-grid-card">
+                        <div class="ide-card-lbl">🖥️ THIẾT BỊ & HỆ ĐIỀU HÀNH</div>
+                        <div class="ide-card-val-big" id="sysOsTitle">...</div>
+                        <div class="ide-spec-line"><span>Nền tảng (Platform):</span> <code id="sysPlatform">...</code></div>
+                        <div class="ide-spec-line"><span>Tên máy (Hostname):</span> <code id="sysHostname">...</code></div>
+                        <div class="ide-spec-line"><span>Người dùng (User):</span> <code id="sysUser">...</code></div>
+                        <div class="ide-spec-line"><span>Khởi động máy (Boot):</span> <code id="sysBoot">...</code></div>
+                    </div>
+
+                    <div class="ide-grid-card">
+                        <div class="ide-card-lbl">⚡ BỘ XỬ LÝ (CPU)</div>
+                        <div class="ide-card-val-big" id="sysCpuName">...</div>
+                        <div class="ide-spec-line"><span>Cấu hình nhân:</span> <code id="sysCpuCores">...</code></div>
+                        <div class="ide-spec-line"><span>Kiến trúc máy:</span> <code id="sysArch">...</code></div>
+                        <div class="ide-meter-box">
+                            <div class="ide-meter-head">
+                                <span>Mức sử dụng CPU:</span>
+                                <span id="sysCpuPctVal" class="meter-pct">0%</span>
+                            </div>
+                            <div class="ide-meter-bg"><div class="ide-meter-bar" id="sysCpuBar" style="width: 0%;"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="ide-grid-card">
+                        <div class="ide-card-lbl">💾 BỘ NHỚ RAM (PHYSICAL MEMORY)</div>
+                        <div class="ide-card-val-big" id="sysRamSummary">...</div>
+                        <div class="ide-spec-line"><span>Bộ nhớ khả dụng:</span> <code id="sysRamAvail">...</code></div>
+                        <div class="ide-spec-line"><span>Đã sử dụng:</span> <code id="sysRamUsed">...</code></div>
+                        <div class="ide-meter-box">
+                            <div class="ide-meter-head">
+                                <span>Tải RAM:</span>
+                                <span id="sysRamPctVal" class="meter-pct">0%</span>
+                            </div>
+                            <div class="ide-meter-bg"><div class="ide-meter-bar color-cyan" id="sysRamBar" style="width: 0%;"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="ide-grid-card">
+                        <div class="ide-card-lbl">💽 Ổ ĐĨA DỰ ÁN (STORAGE)</div>
+                        <div class="ide-card-val-big" id="sysDiskSummary">...</div>
+                        <div class="ide-spec-line"><span>Dung lượng trống:</span> <code id="sysDiskFree">...</code></div>
+                        <div class="ide-spec-line"><span>Thư mục làm việc:</span> <code id="sysDiskCwd">...</code></div>
+                        <div class="ide-meter-box">
+                            <div class="ide-meter-head">
+                                <span>Chiếm dụng ổ:</span>
+                                <span id="sysDiskPctVal" class="meter-pct">0%</span>
+                            </div>
+                            <div class="ide-meter-bg"><div class="ide-meter-bar color-green" id="sysDiskBar" style="width: 0%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Python Environment -->
+            <div class="ide-tab-content" id="tabPython">
+                <div class="ide-console-box">
+                    <div class="console-row"><span class="console-k">Python Version:</span> <span class="console-v text-highlight" id="pyVersion">...</span></div>
+                    <div class="console-row"><span class="console-k">Build & Compiler:</span> <span class="console-v" id="pyCompiler">...</span></div>
+                    <div class="console-row"><span class="console-k">Binary Executable:</span> <span class="console-v text-code" id="pyExecutable">...</span></div>
+                    <div class="console-row"><span class="console-k">Working Directory:</span> <span class="console-v text-code" id="pyCwd">...</span></div>
+                    <div class="console-row"><span class="console-k">Execution Mode:</span> <span class="console-v">Subprocess Sub-runner (STDIN / STDOUT Pipe)</span></div>
+                    <div class="console-row"><span class="console-k">Process Timeout:</span> <span class="console-v">2.000 ms Watchdog Guard (Loop-prevention)</span></div>
+                    <div class="console-row"><span class="console-k">IO Stream Encoding:</span> <span class="console-v">UTF-8 / sys.stdout UTF-8 Reconfigured</span></div>
+                    <div class="console-row"><span class="console-k">Test Automation:</span> <span class="console-v">Automated Vector Assertion Engine v2.0</span></div>
+                </div>
+            </div>
+
+            <!-- Tab 3: Graphics & Client WebGL -->
+            <div class="ide-tab-content" id="tabClient">
+                <div class="ide-console-box">
+                    <div class="console-row"><span class="console-k">Dedicated GPU (Host):</span> <span class="console-v text-highlight" id="gpuHost">...</span></div>
+                    <div class="console-row"><span class="console-k">Client WebGL Renderer:</span> <span class="console-v text-highlight" id="gpuClient">...</span></div>
+                    <div class="console-row"><span class="console-k">WebGL Vendor:</span> <span class="console-v" id="gpuVendor">...</span></div>
+                    <div class="console-row"><span class="console-k">Screen Resolution:</span> <span class="console-v" id="clientScreen">...</span></div>
+                    <div class="console-row"><span class="console-k">Device Pixel Ratio:</span> <span class="console-v" id="clientDpr">...</span></div>
+                    <div class="console-row"><span class="console-k">Browser Engine:</span> <span class="console-v text-code" id="clientBrowser">...</span></div>
+                    <div class="console-row"><span class="console-k">Audio Synthesizer:</span> <span class="console-v">Web Audio API (44.1kHz / 48kHz Stereo)</span></div>
+                    <div class="console-row"><span class="console-k">Client Local Time:</span> <span class="console-v" id="clientTime">...</span></div>
+                </div>
+            </div>
+
+            <!-- Tab 4: License & IDE Info -->
+            <div class="ide-tab-content" id="tabLicense">
+                <div class="ide-console-box">
+                    <div class="console-row"><span class="console-k">Product Name:</span> <span class="console-v text-highlight">MeowCode Studio Professional Edition</span></div>
+                    <div class="console-row"><span class="console-k">Release Channel:</span> <span class="console-v">VNU-UET Academic Engineering Workstation</span></div>
+                    <div class="console-row"><span class="console-k">Curriculum:</span> <span class="console-v">100 Bài Code Python Căn Bản Cho Sen</span></div>
+                    <div class="console-row"><span class="console-k">Course Progress:</span> <span class="console-v text-highlight" id="ideProgress">...</span></div>
+                    <div class="console-row"><span class="console-k">Licensed To:</span> <span class="console-v">Sen-pai (Sinh viên Trường Đại học Công nghệ - ĐHQGHN)</span></div>
+                    <div class="console-row"><span class="console-k">License Status:</span> <span class="console-v" style="color: #10b981; font-weight:700;">Permanent Educational License (Valid)</span></div>
+                    <div class="console-row"><span class="console-k">Components:</span> <span class="console-v">Flask Core, CodeMirror 5, PyPDF2 Parser, Jupyter Engine</span></div>
+                    <div class="console-row"><span class="console-k">Mascot & Companions:</span> <span class="console-v">Cat Companion Engine v2.0 (100% Kawaii)</span></div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="ide-info-footer">
+                <div class="ide-footer-left">
+                    <span class="telemetry-live-badge"><span class="ping-circle"></span> Live Telemetry Connected</span>
+                    <span class="telemetry-time" id="telemetryLastUpdated">Cập nhật: vừa xong</span>
+                </div>
+                <div class="ide-footer-actions">
+                    <button class="ide-btn-tech" onclick="refreshIdeInfo()" title="Lấy dữ liệu thời gian thực mới nhất">
+                        <span class="icon-svg" id="refreshIcon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></span>
+                        <span>Làm mới</span>
+                    </button>
+                    <button class="ide-btn-tech ide-btn-highlight" id="btnCopySpecs" onclick="copySystemSpecs()" title="Sao chép toàn bộ thông số ra clipboard">
+                        <span class="icon-svg"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+                        <span>Sao chép cấu hình</span>
+                    </button>
+                    <button class="ide-btn-tech" onclick="closeIdeInfoModal()">Đóng</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -3274,6 +4120,110 @@ HTML = r"""
             spawnPawConfetti();
         }
 
+        // ======= ACTIVITY LOG FUNCTIONS =======
+        let activityLogData = JSON.parse(localStorage.getItem('meow_activity_log') || '[]');
+        const CUTE_MEOW_MESSAGES = [
+            'meow meow~ 🐾',
+            'sen giỏi quá~',
+            'mèo thấy hãnh diện~',
+            'yuhuuuu! 🎉',
+            'sen tuyệt vời! ✨',
+            'cố lên nha~ 💪',
+            'meow meow~ 😸'
+        ];
+
+        // Icon SVG helpers
+        const ACTIVITY_ICONS = {
+            start: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+            success: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+            fail: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>'
+        };
+
+        function addActivityLog(iconType, message, type = 'info') {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            
+            const entry = {
+                icon: ACTIVITY_ICONS[iconType] || iconType,
+                message: message,
+                time: timeStr,
+                type: type,
+                timestamp: now.getTime(),
+                cuteMessage: CUTE_MEOW_MESSAGES[Math.floor(Math.random() * CUTE_MEOW_MESSAGES.length)]
+            };
+            
+            activityLogData.unshift(entry); // Add to beginning
+            
+            // Keep only last 50 entries
+            if (activityLogData.length > 50) {
+                activityLogData = activityLogData.slice(0, 50);
+            }
+            
+            // Save to localStorage
+            try {
+                localStorage.setItem('meow_activity_log', JSON.stringify(activityLogData));
+            } catch(e) {
+                console.warn('Could not save activity log:', e);
+            }
+            
+            renderActivityLog();
+        }
+
+        function renderActivityLog() {
+            const logBody = document.getElementById('activityLogBody');
+            if (!logBody) return;
+            
+            if (activityLogData.length === 0) {
+                logBody.innerHTML = `
+                    <div class="activity-log-empty">
+                        <div class="activity-log-empty-cat">😺</div>
+                        <div>Chưa có hoạt động nào meow~</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            logBody.innerHTML = activityLogData.map(entry => `
+                <div class="activity-log-item ${entry.type === 'success' ? 'success' : ''}">
+                    <div class="activity-log-time">${entry.time}</div>
+                    <div class="activity-log-message">
+                        <span class="icon-svg">${entry.icon}</span>
+                        <span>${entry.message}</span>
+                    </div>
+                    <div class="activity-log-problem">${entry.cuteMessage}</div>
+                </div>
+            `).join('');
+        }
+
+        function toggleActivityLog() {
+            const sidebar = document.getElementById('activityLogSidebar');
+            const reopenBtn = document.getElementById('activityLogReopenBtn');
+            if (sidebar) {
+                const isCollapsed = sidebar.classList.toggle('collapsed');
+                
+                // Show/hide reopen button
+                if (reopenBtn) {
+                    if (isCollapsed) {
+                        reopenBtn.classList.add('show');
+                    } else {
+                        reopenBtn.classList.remove('show');
+                    }
+                }
+                
+                // Save state to localStorage
+                localStorage.setItem('meow_activity_log_collapsed', isCollapsed ? 'true' : 'false');
+            }
+        }
+
+        function clearActivityLog() {
+            if (confirm('Xóa toàn bộ lịch sử hoạt động? meow~')) {
+                activityLogData = [];
+                localStorage.removeItem('meow_activity_log');
+                renderActivityLog();
+            }
+        }
+        // ======= END ACTIVITY LOG FUNCTIONS =======
+
         // Reload đề bài từ PDF
         async function reloadFromPDF() {
             if (!confirm('Reload tất cả đề bài từ PDF? Thao tác này sẽ mất vài giây meow~')) return;
@@ -3302,6 +4252,17 @@ HTML = r"""
             userSolutions = data.solutions;
             renderList();
             updateProgress();
+            renderActivityLog(); // Initialize activity log
+            
+            // Restore activity log sidebar state
+            const isCollapsed = localStorage.getItem('meow_activity_log_collapsed') === 'true';
+            const sidebar = document.getElementById('activityLogSidebar');
+            const reopenBtn = document.getElementById('activityLogReopenBtn');
+            if (isCollapsed && sidebar) {
+                sidebar.classList.add('collapsed');
+                if (reopenBtn) reopenBtn.classList.add('show');
+            }
+            
             if (problems.length > 0) selectProblem(problems[0].id);
             setupFlyingCatTimer();
         }
@@ -3369,13 +4330,31 @@ HTML = r"""
             cm.setValue(savedCode);
             setTimeout(() => cm.refresh(), 50);
 
+            // Collapsed test cases by default when starting a new problem (haven't tested yet)
+            const panel = document.getElementById('resultsPanel');
+            const isNewProblem = !userSolutions[id] || userSolutions[id].status === 'unsolved';
+            if (isNewProblem && panel) {
+                panel.classList.add('collapsed');
+                panel.classList.remove('expanded');
+            } else {
+                panel.classList.remove('collapsed');
+            }
+
             document.getElementById('resultsArea').innerHTML = '<div style="text-align: center; margin-top: 35px; color: #aaa;">Viết code và bấm Chấm bài (Ctrl+Enter) để bé mèo check nha, meow~~~</div>';
+            
+            // Add activity log entry
+            addActivityLog('start', `Bắt đầu bài ${currentProblem.id}: ${currentProblem.title}`, 'info');
+            
             renderList();
         }
 
         function toggleExpand(forceState = null) {
             const panel = document.getElementById('resultsPanel');
             const isExpanded = forceState !== null ? forceState : !panel.classList.contains('expanded');
+            
+            // Remove collapsed state when manually expanding/toggling
+            panel.classList.remove('collapsed');
+            
             if (isExpanded) {
                 panel.classList.add('expanded');
                 const lbl = document.getElementById('expandLabel');
@@ -3437,6 +4416,13 @@ HTML = r"""
                 renderList();
                 updateProgress();
                 showCatCelebration(data.all_passed);
+
+                // Add activity log entry
+                if (data.all_passed) {
+                    addActivityLog('success', `Hoàn thành bài ${currentProblem.id}: ${currentProblem.title}!`, 'success');
+                } else {
+                    addActivityLog('fail', `Thử lại bài ${currentProblem.id} nhưng chưa đúng hết meow~`, 'fail');
+                }
 
                 let passedCount = Object.values(userSolutions).filter(x => x.status === 'passed').length;
                 checkMilestone(passedCount);
@@ -3795,8 +4781,10 @@ HTML = r"""
             document.body.classList.toggle('dark-mode', isDarkMode);
             const icon = document.getElementById('darkModeIcon');
             if (icon) icon.innerHTML = isDarkMode
-                ? '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
-                : '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+                ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
+                : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+            const label = document.getElementById('darkModeLabel');
+            if (label) label.innerText = isDarkMode ? 'Giao diện tối' : 'Giao diện sáng';
         }
         function toggleDarkMode() {
             isDarkMode = !isDarkMode;
@@ -3985,6 +4973,273 @@ HTML = r"""
             } catch(e) {}
         });
 
+        // ============ MEOWCODE STUDIO PRO - TELEMETRY & ABOUT MODAL ============
+        let lastTelemetryData = null;
+
+        function playIdeBootSound() {
+            try {
+                if (!audioContext) return;
+                if (audioContext.state === 'suspended') audioContext.resume();
+                const now = audioContext.currentTime;
+                const notes = [440, 554.37, 659.25, 880];
+                notes.forEach((f, idx) => {
+                    const osc = audioContext.createOscillator();
+                    const gain = audioContext.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(f, now + idx * 0.04);
+                    gain.gain.setValueAtTime(0.04, now + idx * 0.04);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.04 + 0.22);
+                    osc.connect(gain);
+                    gain.connect(audioContext.destination);
+                    osc.start(now + idx * 0.04);
+                    osc.stop(now + idx * 0.04 + 0.23);
+                });
+            } catch(e) {}
+        }
+
+        function getClientGpuRenderer() {
+            try {
+                const canvas = document.createElement('canvas');
+                const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                if (!gl) return { renderer: 'WebGL Not Supported', vendor: 'Unknown' };
+                const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+                if (!debugInfo) {
+                    return { renderer: gl.getParameter(gl.RENDERER) || 'Generic WebGL', vendor: 'Standard' };
+                }
+                return {
+                    renderer: gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) || 'Generic WebGL',
+                    vendor: gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL) || 'Unknown'
+                };
+            } catch(e) {
+                return { renderer: 'N/A', vendor: 'N/A' };
+            }
+        }
+
+        function openIdeInfoModal() {
+            const modal = document.getElementById('ideInfoModal');
+            if (!modal) return;
+            modal.classList.add('active');
+            playIdeBootSound();
+            fetchSystemInfo();
+        }
+
+        function closeIdeInfoModal() {
+            const modal = document.getElementById('ideInfoModal');
+            if (modal) modal.classList.remove('active');
+        }
+
+        function switchIdeTab(tabKey, btn) {
+            document.querySelectorAll('.ide-tab-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            document.querySelectorAll('.ide-tab-content').forEach(c => c.classList.remove('active'));
+            const target = document.getElementById(
+                tabKey === 'telemetry' ? 'tabTelemetry' :
+                tabKey === 'python' ? 'tabPython' :
+                tabKey === 'client' ? 'tabClient' : 'tabLicense'
+            );
+            if (target) target.classList.add('active');
+        }
+
+        async function fetchSystemInfo() {
+            // Populate Client Specs immediately
+            const gpu = getClientGpuRenderer();
+            const gpuClientEl = document.getElementById('gpuClient');
+            if (gpuClientEl) gpuClientEl.innerText = gpu.renderer;
+            const gpuVendorEl = document.getElementById('gpuVendor');
+            if (gpuVendorEl) gpuVendorEl.innerText = gpu.vendor;
+
+            const clientScreenEl = document.getElementById('clientScreen');
+            if (clientScreenEl) clientScreenEl.innerText = `${window.screen.width} x ${window.screen.height} (${window.innerWidth} x ${window.innerHeight} viewport)`;
+
+            const clientDprEl = document.getElementById('clientDpr');
+            if (clientDprEl) clientDprEl.innerText = `${window.devicePixelRatio || 1}x High-DPI`;
+
+            const clientBrowserEl = document.getElementById('clientBrowser');
+            if (clientBrowserEl) {
+                const ua = navigator.userAgent;
+                let bName = 'Browser Engine';
+                if (ua.includes('Edg/')) bName = 'Microsoft Edge (Chromium)';
+                else if (ua.includes('Chrome/')) bName = 'Google Chrome (Blink Engine)';
+                else if (ua.includes('Firefox/')) bName = 'Mozilla Firefox (Gecko)';
+                else if (ua.includes('Safari/') && !ua.includes('Chrome')) bName = 'Apple Safari (WebKit)';
+                clientBrowserEl.innerText = `${bName} • ${navigator.platform || 'PC'}`;
+            }
+
+            const clientTimeEl = document.getElementById('clientTime');
+            if (clientTimeEl) clientTimeEl.innerText = new Date().toLocaleString();
+
+            // Fetch Real Server & Hardware Data
+            try {
+                const res = await fetch('/api/system_info');
+                const data = await res.json();
+                if (data.status === 'success') {
+                    lastTelemetryData = data;
+                    renderTelemetryData(data);
+                }
+            } catch(err) {
+                console.error('Failed to fetch system info:', err);
+                const chipOs = document.getElementById('chipOs');
+                if (chipOs) chipOs.innerText = 'Lỗi kết nối máy chủ';
+            }
+        }
+
+        function renderTelemetryData(d) {
+            // Quick Chips
+            const chipOs = document.getElementById('chipOs');
+            if (chipOs) chipOs.innerText = `${d.os.system} ${d.os.release}`;
+            const chipCpu = document.getElementById('chipCpu');
+            if (chipCpu) {
+                const shortCpu = d.cpu.name.replace(/Intel\(R\)|Core\(TM\)|\(R\)|\(TM\)/g, '').replace(/Processor|CPU/g, '').trim();
+                chipCpu.innerText = `${shortCpu} (${d.cpu.logical_cores}T)`;
+            }
+            const chipGpu = document.getElementById('chipGpu');
+            if (chipGpu) {
+                const gpuText = (d.gpu && d.gpu.length > 0) ? d.gpu[0] : 'Generic GPU';
+                chipGpu.innerText = gpuText.replace(/NVIDIA|GeForce|\(R\)/g, '').trim();
+            }
+            const chipPy = document.getElementById('chipPy');
+            if (chipPy) chipPy.innerText = `Python ${d.python.version}`;
+
+            // Tab 1: OS & Hardware
+            const sysOsTitle = document.getElementById('sysOsTitle');
+            if (sysOsTitle) sysOsTitle.innerText = `${d.os.system} ${d.os.release} (Build ${d.os.version})`;
+            const sysPlatform = document.getElementById('sysPlatform');
+            if (sysPlatform) sysPlatform.innerText = d.os.platform;
+            const sysHostname = document.getElementById('sysHostname');
+            if (sysHostname) sysHostname.innerText = d.os.hostname;
+            const sysUser = document.getElementById('sysUser');
+            if (sysUser) sysUser.innerText = d.os.username;
+            const sysBoot = document.getElementById('sysBoot');
+            if (sysBoot) sysBoot.innerText = d.boot_time || 'N/A';
+
+            // CPU
+            const sysCpuName = document.getElementById('sysCpuName');
+            if (sysCpuName) sysCpuName.innerText = d.cpu.name;
+            const sysCpuCores = document.getElementById('sysCpuCores');
+            if (sysCpuCores) sysCpuCores.innerText = `${d.cpu.physical_cores} Nhân thực / ${d.cpu.logical_cores} Luồng`;
+            const sysArch = document.getElementById('sysArch');
+            if (sysArch) sysArch.innerText = `${d.os.arch} (64-bit Architecture)`;
+            const sysCpuPctVal = document.getElementById('sysCpuPctVal');
+            if (sysCpuPctVal) sysCpuPctVal.innerText = `${d.cpu.usage_percent}%`;
+            const sysCpuBar = document.getElementById('sysCpuBar');
+            if (sysCpuBar) sysCpuBar.style.width = `${Math.min(Math.max(d.cpu.usage_percent, 2), 100)}%`;
+
+            // RAM
+            const sysRamSummary = document.getElementById('sysRamSummary');
+            if (sysRamSummary) sysRamSummary.innerText = `${d.ram.used_gb} GB / ${d.ram.total_gb} GB`;
+            const sysRamAvail = document.getElementById('sysRamAvail');
+            if (sysRamAvail) sysRamAvail.innerText = `${d.ram.available_gb} GB Trống`;
+            const sysRamUsed = document.getElementById('sysRamUsed');
+            if (sysRamUsed) sysRamUsed.innerText = `${d.ram.used_gb} GB (${d.ram.percent}%)`;
+            const sysRamPctVal = document.getElementById('sysRamPctVal');
+            if (sysRamPctVal) sysRamPctVal.innerText = `${d.ram.percent}%`;
+            const sysRamBar = document.getElementById('sysRamBar');
+            if (sysRamBar) sysRamBar.style.width = `${d.ram.percent}%`;
+
+            // Disk
+            const sysDiskSummary = document.getElementById('sysDiskSummary');
+            if (sysDiskSummary) sysDiskSummary.innerText = `${d.disk.total_gb} GB`;
+            const sysDiskFree = document.getElementById('sysDiskFree');
+            if (sysDiskFree) sysDiskFree.innerText = `${d.disk.free_gb} GB Khả dụng`;
+            const sysDiskCwd = document.getElementById('sysDiskCwd');
+            if (sysDiskCwd) sysDiskCwd.innerText = d.python.cwd;
+            const sysDiskPctVal = document.getElementById('sysDiskPctVal');
+            if (sysDiskPctVal) sysDiskPctVal.innerText = `${d.disk.percent}%`;
+            const sysDiskBar = document.getElementById('sysDiskBar');
+            if (sysDiskBar) sysDiskBar.style.width = `${d.disk.percent}%`;
+
+            // Tab 2: Python
+            const pyVersion = document.getElementById('pyVersion');
+            if (pyVersion) pyVersion.innerText = d.python.full_version;
+            const pyCompiler = document.getElementById('pyCompiler');
+            if (pyCompiler) pyCompiler.innerText = d.python.compiler;
+            const pyExecutable = document.getElementById('pyExecutable');
+            if (pyExecutable) pyExecutable.innerText = d.python.executable;
+            const pyCwd = document.getElementById('pyCwd');
+            if (pyCwd) pyCwd.innerText = d.python.cwd;
+
+            // Tab 3: Dedicated GPU
+            const gpuHost = document.getElementById('gpuHost');
+            if (gpuHost) gpuHost.innerText = (d.gpu && d.gpu.length > 0) ? d.gpu.join(', ') : 'Standard Graphics';
+
+            // Tab 4: IDE metrics
+            const ideProgress = document.getElementById('ideProgress');
+            if (ideProgress) {
+                ideProgress.innerText = `Đã hoàn thành ${d.ide.passed}/${d.ide.total_problems} bài (${d.ide.progress_percent}%) • Cần sửa: ${d.ide.failed} bài`;
+            }
+
+            // Footer Timestamp
+            const updatedEl = document.getElementById('telemetryLastUpdated');
+            if (updatedEl) updatedEl.innerText = `Cập nhật: ${d.server_time.split(' ')[1]}`;
+        }
+
+        async function refreshIdeInfo() {
+            const icon = document.getElementById('refreshIcon');
+            if (icon) icon.classList.add('spinning');
+            await fetchSystemInfo();
+            setTimeout(() => {
+                if (icon) icon.classList.remove('spinning');
+            }, 600);
+        }
+
+        function copySystemSpecs() {
+            if (!lastTelemetryData) {
+                alert('Đang nạp dữ liệu, vui lòng thử lại sau 1 giây...');
+                return;
+            }
+            const d = lastTelemetryData;
+            const gpu = getClientGpuRenderer();
+            const report = `============================================================
+🐾 MEOWCODE STUDIO PRO - SYSTEM TELEMETRY & DIAGNOSTICS
+============================================================
+[Host & Operating System]
+• OS Platform   : ${d.os.platform} (${d.os.arch})
+• OS Version    : ${d.os.system} ${d.os.release} (Build ${d.os.version})
+• Hostname/User : ${d.os.hostname} / ${d.os.username}
+• System Boot   : ${d.boot_time}
+
+[Hardware Telemetry]
+• CPU Model     : ${d.cpu.name}
+• CPU Topology  : ${d.cpu.physical_cores} Cores / ${d.cpu.logical_cores} Threads
+• CPU Usage     : ${d.cpu.usage_percent}%
+• System RAM    : ${d.ram.used_gb} GB used / ${d.ram.total_gb} GB total (${d.ram.percent}%)
+• Project Disk  : ${d.disk.free_gb} GB free / ${d.disk.total_gb} GB total (${d.disk.percent}% used)
+• Dedicated GPU : ${(d.gpu || []).join(', ')}
+• WebGL GPU     : ${gpu.renderer} (${gpu.vendor})
+
+[Python Runtime & Sandbox]
+• Python Version: ${d.python.full_version}
+• Compiler      : ${d.python.compiler}
+• Executable    : ${d.python.executable}
+• Working Dir   : ${d.python.cwd}
+• Sandbox Guard : Subprocess Pipe (Timeout 2.0s, UTF-8 IO Stream)
+
+[MeowCode Curriculum & Academic Progress]
+• Edition       : ${d.ide.version} (${d.ide.channel})
+• Progress      : ${d.ide.passed}/${d.ide.total_problems} bài tập đã vượt qua (${d.ide.progress_percent}%)
+• License       : VNU-UET Academic Educational License
+============================================================
+Report Generated at: ${new Date().toLocaleString()}`;
+
+            navigator.clipboard.writeText(report).then(() => {
+                const btn = document.getElementById('btnCopySpecs');
+                if (btn) {
+                    const originalHTML = btn.innerHTML;
+                    btn.innerHTML = '<span>✅ Đã sao chép!</span>';
+                    setTimeout(() => { btn.innerHTML = originalHTML; }, 2000);
+                }
+            }).catch(() => {
+                prompt('Sao chép thông tin hệ thống bên dưới:', report);
+            });
+        }
+
+        // Close on ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeIdeInfoModal();
+            }
+        });
+
         loadData();
     </script>
 </body>
@@ -4143,18 +5398,161 @@ def autosave():
 
     return jsonify({"status": "saved", "id": pid})
 
+@app.route("/api/system_info", methods=["GET"])
+def api_system_info():
+    """API trả về thông số máy thật, thiết bị, RAM, CPU, GPU, Python runtime"""
+    import platform, sys, os, time
+    try:
+        import psutil
+    except ImportError:
+        psutil = None
+
+    # Host & OS
+    os_info = {
+        "system": platform.system(),
+        "release": platform.release(),
+        "version": platform.version(),
+        "platform": platform.platform(),
+        "arch": platform.machine(),
+        "hostname": platform.node(),
+        "username": os.environ.get("USERNAME") or os.environ.get("USER") or "user"
+    }
+
+    # CPU Information
+    cpu_name = platform.processor() or "Multi-Core Processor"
+    if sys.platform == "win32":
+        try:
+            import winreg
+            k = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"HARDWARE\DESCRIPTION\System\CentralProcessor\0")
+            val, _ = winreg.QueryValueEx(k, "ProcessorNameString")
+            if val:
+                cpu_name = val.strip()
+        except Exception:
+            pass
+
+    logical_cores = os.cpu_count() or 1
+    physical_cores = logical_cores
+    cpu_usage = 0.0
+    if psutil:
+        try:
+            physical_cores = psutil.cpu_count(logical=False) or logical_cores
+            cpu_usage = psutil.cpu_percent(interval=None)
+        except Exception:
+            pass
+
+    cpu_info = {
+        "name": cpu_name,
+        "logical_cores": logical_cores,
+        "physical_cores": physical_cores,
+        "usage_percent": cpu_usage
+    }
+
+    # Dedicated GPU Detection via Windows Registry
+    gpus = []
+    if sys.platform == "win32":
+        try:
+            import winreg
+            key_path = r"SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}"
+            with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path) as k:
+                for i in range(25):
+                    try:
+                        subkey = winreg.EnumKey(k, i)
+                        with winreg.OpenKey(k, subkey) as sub:
+                            try:
+                                desc, _ = winreg.QueryValueEx(sub, "DriverDesc")
+                                if desc and desc not in gpus and "virtual" not in desc.lower() and "basic" not in desc.lower():
+                                    gpus.append(desc)
+                            except Exception:
+                                pass
+                    except OSError:
+                        break
+        except Exception:
+            pass
+    if not gpus:
+        gpus = ["Integrated / Standard Graphics"]
+
+    # RAM & Storage
+    ram_info = {"total_gb": 0, "available_gb": 0, "used_gb": 0, "percent": 0}
+    disk_info = {"total_gb": 0, "free_gb": 0, "percent": 0}
+    boot_time = "N/A"
+    if psutil:
+        try:
+            vm = psutil.virtual_memory()
+            ram_info = {
+                "total_gb": round(vm.total / (1024**3), 2),
+                "available_gb": round(vm.available / (1024**3), 2),
+                "used_gb": round((vm.total - vm.available) / (1024**3), 2),
+                "percent": vm.percent
+            }
+            du = psutil.disk_usage(os.getcwd())
+            disk_info = {
+                "total_gb": round(du.total / (1024**3), 1),
+                "free_gb": round(du.free / (1024**3), 1),
+                "percent": du.percent
+            }
+            boot_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(psutil.boot_time()))
+        except Exception:
+            pass
+
+    # Python Environment
+    python_info = {
+        "version": platform.python_version(),
+        "full_version": sys.version,
+        "compiler": platform.python_compiler(),
+        "executable": sys.executable,
+        "cwd": os.getcwd()
+    }
+
+    # IDE Metrics
+    solutions = {}
+    if os.path.exists(SOLUTIONS_FILE):
+        try:
+            with open(SOLUTIONS_FILE, "r", encoding="utf-8") as f:
+                solutions = json.load(f)
+        except Exception:
+            pass
+    passed = sum(1 for s in solutions.values() if s.get("status") == "passed")
+    failed = sum(1 for s in solutions.values() if s.get("status") == "failed")
+    try:
+        total = len(init_problems())
+    except Exception:
+        total = 100
+
+    ide_info = {
+        "version": "2.4.0-PRO (Build 2026.11.05)",
+        "channel": "Academic Pro Workstation Edition",
+        "total_problems": total,
+        "passed": passed,
+        "failed": failed,
+        "unsolved": total - passed - failed,
+        "progress_percent": round((passed / total * 100), 1) if total else 0
+    }
+
+    return jsonify({
+        "status": "success",
+        "os": os_info,
+        "cpu": cpu_info,
+        "gpu": gpus,
+        "ram": ram_info,
+        "disk": disk_info,
+        "boot_time": boot_time,
+        "python": python_info,
+        "ide": ide_info,
+        "server_time": time.strftime("%Y-%m-%d %H:%M:%S")
+    })
+
 if __name__ == "__main__":
     import sys, io
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
-    print("\n" + "=" * 50)
-    print("  MeowCode IDE 2.0 đang khởi động...")
-    print("=" * 50)
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace", line_buffering=True)
+    print("\n" + "=" * 50, flush=True)
+    print("  MeowCode IDE 2.0 đang khởi động...", flush=True)
+    print("=" * 50, flush=True)
     
     # Khởi tạo problems từ PDF hoặc cache
     init_problems()
     
-    print("\n" + "=" * 50)
-    print("  ✅ MeowCode IDE chạy tại: http://127.0.0.1:5000")
-    print("  🐱 Mở browser để tận hưởng code cùng mèo nha!")
-    print("=" * 50 + "\n")
+    print("\n" + "=" * 50, flush=True)
+    print("  ✅ MeowCode IDE chạy tại: http://127.0.0.1:5000", flush=True)
+    print("  🐱 Mở browser để tận hưởng code cùng mèo nha!", flush=True)
+    print("=" * 50 + "\n", flush=True)
     app.run(port=5000, debug=False)
