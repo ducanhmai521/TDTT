@@ -2586,7 +2586,6 @@ HTML = r"""
                     <div class="logo-title">MeowCode</div>
                 </div>
             </div>
-            <span class="logo-sub">100 Bài Python Cho Sen</span>
         </div>
         
         <div class="header-actions">
@@ -2596,9 +2595,6 @@ HTML = r"""
             </div>
             <!-- Cat #6: Header watcher cat -->
             <div class="header-watcher-cat" onclick="spawnPawConfetti()" title="Bấm mèo để tung confetti!"><div class="mc " style="width:28px;height:24px;display:inline-block;position:relative;"><div class="mc tl" style="width:12px;height:3px;top:10px;left:-8px;"></div><div class="mc h" style="width:18px;height:18px;top:0;left:5px;"><div class="mc el" style="border-left-width:5px;border-right-width:5px;border-bottom-width:8px;top:-6px;left:1px;transform:rotate(-15deg);"></div><div class="mc er" style="border-left-width:5px;border-right-width:5px;border-bottom-width:8px;top:-6px;right:1px;transform:rotate(15deg);"></div><div class="mc ey" style="top:8px;left:4px;"></div><div class="mc ey" style="top:8px;right:4px;"></div><div class="mc ns" style="top:12px;left:50%;transform:translateX(-50%);"></div><div style="position:absolute;width:5px;height:3px;background:rgba(255,94,151,0.5);border-radius:50%;top:11px;left:1px;"></div><div style="position:absolute;width:5px;height:3px;background:rgba(255,94,151,0.5);border-radius:50%;top:11px;right:1px;"></div></div></div>            </div>
-            <button class="btn btn-outline" onclick="reloadFromPDF()" title="Reload đề bài từ PDF" style="padding:6px 10px;">
-                <span class="icon-svg"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.39"/></svg></span> PDF
-            </button>
             <button class="btn btn-outline" id="darkModeBtn" onclick="toggleDarkMode()" title="Chuyển giao diện sáng/tối" style="padding:6px 10px;">
                 <span class="icon-svg" id="darkModeIcon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
             </button>
